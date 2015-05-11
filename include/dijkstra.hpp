@@ -9,15 +9,13 @@ struct Dijkstra
 {
     struct Hash { size_t operator()(S const& s) const { return s.hash(); } };
 
-    using namespace std;
-
     Dijkstra(GS f) : fn(f) {}
     GS fn;
 
     S solve(S init)
     {
-        priority_queue<S, vector<S>, greater<S>> pq;
-        unordered_set<S, Hash> ss;
+        std::priority_queue<S, std::vector<S>, std::greater<S>> pq;
+        std::unordered_set<S, Hash> ss;
 
         pq.push(init);
         while(!pq.empty()){
@@ -47,9 +45,24 @@ struct Dijkstra
     }
 };
 
-/** example Project Euler 18のExample
+
+/** example Project Euler 18
 using uint = unsigned int;
-vector<vector<uint>> v = {{3}, {7, 5}, {2, 4, 6}, {8, 5, 9, 3}};
+std::vector<std::vector<uint>> v = {{75},
+{95,64},
+{17,47,82},
+{18,35,87,10},
+{20, 4,82,47,65},
+{19, 1,23,75, 3,34},
+{88, 2,77,73, 7,63,67},
+{99,65, 4,28, 6,16,70,92},
+{41,41,26,56,83,40,80,70,33},
+{41,48,72,33,47,32,37,16,94,29},
+{53,71,44,65,25,43,91,52,97,51,14},
+{70,11,33,28,77,73,17,78,39,68,17,57},
+{91,71,52,38,17,14,91,43,58,50,27,29,48},
+{63,66, 4,68,89,53,67,30,73,16,69,87,40,31},
+{04,62,98,27,23, 9,70,98,73,93,38,53,60, 4,23}};
 
 // 状態を表す型
 struct S {
@@ -62,7 +75,7 @@ struct S {
     bool operator==(S const & e) const { return i == e.i && j == e.j; }
 
     // ハッシュ関数
-    size_t hash() const { return s.i + s.j; }
+    size_t hash() const { return i + j; }
 };
 
 // パス(枝)を表す型
@@ -80,7 +93,7 @@ struct GS
     template <typename Fn>
     void iterP(S & s, Fn fn)
     {
-        if(s.i == 3)
+        if(s.i == v.size()-1)
             return;
 
         auto i = s.i+1,
@@ -94,7 +107,7 @@ struct GS
 int main()
 {
     GS fn;
-    cout << Dijkstra<S, P, GS>(fn).solve({0, 0, v[0][0]}).c << endl;
+    std::cout << Dijkstra<S, P, GS>(fn).solve({0, 0, v[0][0]}).c << std::endl;
     return 0;
 }
 */
