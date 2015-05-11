@@ -19,21 +19,11 @@ struct Dijkstra
 
         pq.push(init);
         while(!pq.empty()){
-            S s = pq.top();
-            pq.pop();
-
-            fn.iterP(s, [&](P const & p){
-                S e = p.apply(s);
-                auto g = ss.find(e);
-                if(g == ss.end()){
-                    ss.insert(e);
-                    pq.push(e);
-                }else if(e > *g){
-                    ss.erase(g);
-                    ss.insert(e);
-                    pq.push(e);
-                }
-            });
+            S s = pq.top(); pq.pop();
+            auto g = ss.find(s);
+            if(g != ss.end()) { if(*g > s) continue; else ss.erase(g); }
+            ss.insert(s);
+            fn.iterP(s, [&](P const & p){ pq.push(p.apply(s)); });
         }
 
         auto l = &*(ss.begin());
