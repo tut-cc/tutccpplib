@@ -5,8 +5,6 @@
 #include <iostream>
 #include <cstring>
 
-using namespace std;
-
 template <typename S, typename GS>
 struct Dijkstra
 {
@@ -46,7 +44,7 @@ struct Dijkstra1D
     S solve(S init)
     {
         std::priority_queue<S, std::vector<S>, std::greater<S>> q;
-        vector<bool> ss(N, false);
+        std::vector<bool> ss(N, false);
 
         q.push(init);
         while(!q.empty()){
@@ -73,7 +71,7 @@ struct Dijkstra2D
     S solve(S init)
     {
         std::priority_queue<S, std::vector<S>, std::greater<S>> q;
-        vector<vector<bool>> m(R, vector<bool>(C, false));
+        std::vector<std::vector<bool>> m(R, std::vector<bool>(C, false));
 
         q.push(init);
         while(!q.empty()){
@@ -100,7 +98,7 @@ struct Dijkstra3D
     S solve(S init)
     {
         std::priority_queue<S, std::vector<S>, std::greater<S>> q;
-        vector<vector<vector<bool>>> m(A, vector<vector<bool>>(B, vector<bool>(C, false)));
+        std::vector<std::vector<std::vector<bool>>> m(A, std::vector<std::vector<bool>>(B, std::vector<bool>(C, false)));
 
         q.push(init);
         while(!q.empty()){
